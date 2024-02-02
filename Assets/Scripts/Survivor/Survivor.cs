@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,12 +12,12 @@ public class Survivor : MonoBehaviour
     public int sanity;
     public int temperature;
 
-    public Inventory inventory = new Inventory();
+    public Inventory inventory;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        FindResource(AllResouceTypes.ResourceType.Wood);
     }
 
     // Update is called once per frame
@@ -24,4 +25,15 @@ public class Survivor : MonoBehaviour
     {
         
     }
+
+    private void FindResource(AllResouceTypes.ResourceType _resourceType)
+    {
+        ResourceObjects.Instance.FindResources(_resourceType);
+    }
+
+    /*private void FindResourcesByData(ResourceData _resourceData)
+    {
+        List<Resource> needResources = ResourceObjects.Instance.FindResources(_resourceData);
+        Debug.Log(needResources);
+    }*/
 }
