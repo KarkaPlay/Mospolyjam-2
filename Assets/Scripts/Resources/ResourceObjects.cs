@@ -25,6 +25,9 @@ public class ResourceObjects : MonoBehaviour
         SetAllObjects();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void SetAllObjects()
     {
         allResourceObjects = GetComponentsInChildren<Resource>().ToList();
@@ -49,12 +52,12 @@ public class ResourceObjects : MonoBehaviour
         return returnList;*/
     }
     
+    // TODO: Если нужных ресурсов не найдено, показывается иконка
     public List<Resource> FindResources(AllResouceTypes.ResourceType resourceType)
     {
         List<Resource> returnList = new List<Resource>();
         returnList = allResourceObjects.FindAll(resource => resource.resourceData.resourceType == resourceType);
         
-        Debug.Log("Найденные ресурсы: "+ returnList.ToString());
         return returnList;
     }
 }

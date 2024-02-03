@@ -1,42 +1,44 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Resource : MonoBehaviour
 {
     public ResourceData resourceData;
-    
+
     /// <summary>
-    /// Общее количество этого ресурса в этом объекте
+    /// Сколько еще раз можно добыть ресурс. Если его меньше 0, то игровой объект уничтожается
     /// </summary>
-    [Tooltip("Общее количество этого ресурса в этом объекте")]
+    [FormerlySerializedAs("Count")] [Tooltip("Сколько еще раз можно добыть ресурс")]
     public int count;
-    
+
     /// <summary>
     /// Сколько единиц ресурса человек может взять за раз
     /// </summary>
     [Tooltip("Сколько единиц ресурса человек может взять за раз")]
     public int oneTake;
 
-    public bool playerIsNear = true;
-
     /// <summary>
-    /// Собирает ресурс этого объекта и дает его человеку
+    /// Уменьшает количество ресурса у объекта
     /// </summary>
-    /// <param name="survivorResource">Ресурс человека, который будет пополняться</param>
-    /// <returns><para>0 Если человек не рядом</para>
-    /// 1 Если пытается взять больше чем ему надо
-    /// <para>2 Если успешно взял ресурс</para>
-    /// </returns>
-    public int CollectResource(ref float survivorResource)
+    public void CollectResource()
     {
-        if (!playerIsNear)
-            return 0;
+        count--;
+    }
 
-        if (survivorResource > resourceData.survivorNeed)
-            return 1;
+    private void Start()
+    {
+        NavMeshBaker.Instance.Bake();
+        transform.SetParent(ResourceObjects.Instance.gameObject.transform);
+        ResourceObjects.Instance.allResourceObjects.Add(this);
+    }
+
+    private void OnDestroy()
+    {
+        NavMeshBaker.Instance.Bake();
         
-        survivorResource += oneTake;
-        return 2;
+        ResourceObjects.Instance.allResourceObjects.Remove(this);
     }
 }

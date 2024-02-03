@@ -57,6 +57,9 @@ public class Survivor : MonoBehaviour
         FindResource(AllResouceTypes.ResourceType.Wood, true);
     }
 
+    /// <summary>
+    /// Настраивает NavMeshAgent у человека
+    /// </summary>
     private void SetupNavAgent()
     {
         navAgent = GetComponent<NavMeshAgent>();
@@ -71,8 +74,9 @@ public class Survivor : MonoBehaviour
         CheckDistanceToTarget();
     }
 
+    // TODO: Добавить больше модификаторов
     /// <summary>
-    /// Постепенно уменьшает жизненные характеристики человека, используя модификаторы времени суток и другие (сделать)
+    /// Постепенно уменьшает жизненные характеристики человека, используя модификаторы времени суток и другие
     /// </summary>
     private void Starve()
     {
@@ -114,13 +118,19 @@ public class Survivor : MonoBehaviour
             },
             _ => modifiers
         };
-
-        water -= modifiers[nameof(water)] * Time.deltaTime;
-        food -= modifiers[nameof(food)] * Time.deltaTime;
-        sleep -= modifiers[nameof(sleep)] * Time.deltaTime;
-        sanity -= modifiers[nameof(sanity)] * Time.deltaTime;
+        
+        // УДАЛИТЬ!!!
+        float difficulty = 1;
+        
+        water -= modifiers[nameof(water)] * Time.deltaTime * difficulty;
+        food -= modifiers[nameof(food)] * Time.deltaTime * difficulty;
+        sleep -= modifiers[nameof(sleep)] * Time.deltaTime * difficulty;
+        sanity -= modifiers[nameof(sanity)] * Time.deltaTime * difficulty;
     }
 
+    /// <summary>
+    /// Проверяет нужды человека в данный момент. Если какая-то характеристика меньше, чем нужно, человек ищет где её восполнить
+    /// </summary>
     private void CheckNeeds()
     {
         if (currentState is not (State.Idle or State.WalkingAround)) return;
@@ -136,14 +146,11 @@ public class Survivor : MonoBehaviour
         }
     }
 
-    private IEnumerator ChangeStateToIdle()
+    /// <summary>
+    /// Запускает корутину Walking()
+    /// </summary>
+    private void StartWalking()
     {
-        Debug.Log("Запущена ChangeStateToIdle");
-        StopCoroutine(Walking());
-        StopCoroutine(nameof(CollectingResource));
-        speed = 0.5f;
-        currentState = State.Idle;
-        yield return new WaitForSeconds(3f);
         StartCoroutine(Walking());
     }
 
@@ -168,8 +175,7 @@ public class Survivor : MonoBehaviour
     }
     
     /// <summary>
-    /// Проверяет расстояние до цели. Если цель достигнута, вызывается OnNavAgentTargetReached(), а currentState
-    /// меняется на CollectingResource
+    /// Проверяет расстояние до цели. Если цель достигнута, вызывается OnNavAgentTargetReached()
     /// </summary>
     private void CheckDistanceToTarget()
     {
@@ -182,14 +188,13 @@ public class Survivor : MonoBehaviour
             navAgent.pathStatus==NavMeshPathStatus.PathComplete &&
             navAgent.remainingDistance==0)
         {
-            navAgent.ResetPath();
-            currentState = State.CollectingResource;
+            navAgent.SetDestination(transform.position);
             OnNavAgentTargetReached();
         }
     }
 
     /// <summary>
-    /// Вызывается, когда человек дошел до цели
+    /// Вызывается, когда человек дошел до цели. Начинает корутину CollectingResource
     /// </summary>
     private void OnNavAgentTargetReached()
     {
@@ -197,19 +202,23 @@ public class Survivor : MonoBehaviour
         StartCoroutine(CollectingResource(targetObject.GetComponent<Resource>()));
     }
 
+    /// <summary>
+    /// Пока currentState = CollectingResource каждые 2 секунды пытается собрать ресурс у объекта
+    /// </summary>
+    /// <param name="resourceToCollect">Ресурс, который человек будет пытаться собрать</param>
     private IEnumerator CollectingResource(Resource resourceToCollect)
     {
+        currentState = State.CollectingResource;
         speed = 0;
         Debug.Log($"Начали собирать ресурс {resourceToCollect.resourceData.resourceType.ToString()}");
         
         while (currentState == State.CollectingResource)
         {
-            Debug.Log("CollectingResource: ждем 2 секунды");
             yield return new WaitForSeconds(2f);
-            Debug.Log($"CollectingResource: пытаемся собрать ресурс {resourceToCollect.resourceData.resourceType.ToString()}");
             switch (resourceToCollect.resourceData.resourceType)
             {
                 case AllResouceTypes.ResourceType.Water:
+                    Debug.Log("Пытаемся собрать воду");
                     CollectResource(resourceToCollect, ref water);
                     break;
                 case AllResouceTypes.ResourceType.Food:
@@ -217,70 +226,46 @@ public class Survivor : MonoBehaviour
                     break;
                 default:
                     Debug.LogAssertion($"Сбор ресурса {resourceToCollect.resourceData.resourceType} не прописан в Survivor.CollectingResource()");
-                    StartCoroutine(ChangeStateToIdle());
+                    StartWalking();
                     break;
             }
-            Debug.Log("Собрали ресурс");
         }
         Debug.Log("Закончили собирать ресурс");
     }
 
+    /// <summary>
+    /// Запускает у ресурса resource.CollectResource() и добавляет oneTake к соответствующей характеристике человека
+    /// </summary>
+    /// <param name="resource">Ресурс, который человек пытается собрать</param>
+    /// <param name="survivorResource">Характеристика человека, которая будет увеличиваться</param>
     private void CollectResource(Resource resource, ref float survivorResource)
     {
-        survivorResource += resource.oneTake;
-        Debug.Log("Собрали ресурс");
-        if (survivorResource > resource.resourceData.survivorNeed)
+        if (resource.count > 0 && survivorResource < resource.resourceData.survivorNeed)
         {
-            StartCoroutine(ChangeStateToIdle());
+            resource.CollectResource();
+            survivorResource += resource.oneTake;
         }
-        
-        /*switch (resource.resourceData.resourceType)
+        if (resource.count <= 0)
         {
-            case AllResouceTypes.ResourceType.Water:
-                water += resource.oneTake;
-                Debug.Log("Собрали ресурс");
-                if (water > resource.resourceData.survivorNeed)
-                {
-                    StartCoroutine(ChangeStateToIdle());
-                }
-                break;
-            case AllResouceTypes.ResourceType.Wood:
-                Debug.LogAssertion("При сборе этого типа ничего не происходит");
-                StartCoroutine(ChangeStateToIdle());
-                break;
-            case AllResouceTypes.ResourceType.Stone:
-                Debug.LogAssertion("При сборе этого типа ничего не происходит");
-                StartCoroutine(ChangeStateToIdle());
-                break;
-            case AllResouceTypes.ResourceType.Food:
-                food += resource.oneTake;
-                Debug.Log("Собрали ресурс");
-                if (food > resource.resourceData.survivorNeed)
-                {
-                    StartCoroutine(ChangeStateToIdle());
-                }
-                break;
-            default:
-                Debug.LogAssertion("Попытка собрать неизвестный тип");
-                break;
-        }*/
-        
+            Destroy(resource.gameObject);
+            StartWalking();
+        }
+        else if (survivorResource > resource.resourceData.survivorNeed)
+        {
+            StartWalking();
+        }
     }
 
     /// <summary>
-    /// Если currentState не CollectingResource и не GoingToTarget то для navAgent задается новая цель.
-    /// currentState меняется на GoingToTarget
+    /// Для navAgent задается новая цель, увеличиваеся скорость, currentState меняется на GoingToTarget
     /// </summary>
     /// <param name="target">GameObject, до которого будет идти человек</param>
     private void GoTo(GameObject target)
     {
-        if (currentState is not State.CollectingResource and not State.GoingToTarget)
-        {
-            Speed = 2f;
-            navAgent.SetDestination(target.transform.position);
-            targetObject = target;
-            currentState = State.GoingToTarget;
-        }
+        currentState = State.GoingToTarget;
+        Speed = 2f;
+        targetObject = target;
+        navAgent.SetDestination(target.transform.position);
     }
 
     /// <summary>
@@ -291,10 +276,13 @@ public class Survivor : MonoBehaviour
     /// <returns>Возвращает первый попавшийся (не ближайший) Resource типа _resourceType</returns>
     private Resource FindResource(AllResouceTypes.ResourceType _resourceType, bool needToGo = false)
     {
-        StopCoroutine(ChangeStateToIdle());
+        if (currentState is State.CollectingResource or State.GoingToTarget)
+            return null;
+        
         StopCoroutine(Walking());
         Debug.Log($"Начали искать ресурс {_resourceType.ToString()}");
         
+        // TODO: Искать не 0-й объект списка, а ближайший к человеку
         var foundResource = ResourceObjects.Instance.FindResources(_resourceType)[0];
 
         if (needToGo)
@@ -303,23 +291,5 @@ public class Survivor : MonoBehaviour
         }
         
         return foundResource;
-    }
-
-    // Подошли к ресурсу
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.TryGetComponent(out Resource resource))
-        {
-            resource.playerIsNear = true;
-        }
-    }
-    
-    // Отошли от ресурса
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.TryGetComponent(out Resource resource))
-        {
-            resource.playerIsNear = false;
-        }
     }
 }
