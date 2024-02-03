@@ -7,10 +7,30 @@ public class TimeOfDay : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI timeOfDayText;
 
-    private float time; // в "часах"
+    [SerializeField] private float time; // в "часах"
+    public enum DayTime
+    {
+        Morning,
+        Day,
+        Evening,
+        Night
+    }
+    public static DayTime currentDayTime;
+    public float timeSpeed = 1f;
+
+    public static TimeOfDay Instance;
 
     void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
         time = 0f;
         StartCoroutine(TimeCounter());
     }
@@ -19,29 +39,32 @@ public class TimeOfDay : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(3f);
-            time += 3f / 60;
+            yield return new WaitForSeconds(1);
+            time += timeSpeed;
             if (time >= 24f)
             {
                 time = 0f;
             }
 
-            // Вывод текста
-            if (time >= 4f && time < 12f)
+            switch (time)
             {
-                timeOfDayText.text = "Утро";
-            }
-            else if (time >= 12f && time < 18f)
-            {
-                timeOfDayText.text = "День";
-            }
-            else if (time >= 18f && time < 23f)
-            {
-                timeOfDayText.text = "Вечер";
-            }
-            else
-            {
-                timeOfDayText.text = "Ночь";
+                // Смена времени суток
+                case >= 4f and < 12f:
+                    timeOfDayText.text = "Утро";
+                    currentDayTime = DayTime.Morning;
+                    break;
+                case >= 12f and < 18f:
+                    timeOfDayText.text = "День";
+                    currentDayTime = DayTime.Day;
+                    break;
+                case >= 18f and < 23f:
+                    timeOfDayText.text = "Вечер";
+                    currentDayTime = DayTime.Evening;
+                    break;
+                default:
+                    timeOfDayText.text = "Ночь";
+                    currentDayTime = DayTime.Night;
+                    break;
             }
         }
     }

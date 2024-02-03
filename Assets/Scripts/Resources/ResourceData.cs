@@ -9,5 +9,10 @@ public class ResourceData : ScriptableObject
     [SerializeField] private string resourceName;
     [SerializeField] private string description;
     [SerializeField] private int resourceID;
-    [SerializeField] public AllResouceTypes.ResourceType resourceType;
+    public AllResouceTypes.ResourceType resourceType;
+    
+    /// <summary>
+    /// Сколько единиц ресурса нужно игроку
+    /// </summary>
+    public int survivorNeed;
 }

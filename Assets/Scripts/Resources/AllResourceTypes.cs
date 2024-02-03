@@ -13,6 +13,8 @@ public class AllResouceTypes
     public enum ResourceType
     {
         Wood,
-        Stone
+        Stone,
+        Water,
+        Food
     }
 }

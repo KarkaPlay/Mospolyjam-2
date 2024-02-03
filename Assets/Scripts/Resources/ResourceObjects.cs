@@ -35,7 +35,7 @@ public class ResourceObjects : MonoBehaviour
         List<Resource> returnList = new List<Resource>();
         returnList = allResourceObjects.FindAll(resource => resource.resourceData == resourceData);
         
-        Debug.Log(returnList);
+        Debug.Log("Все ресурсы: "+ returnList.ToString());
         return returnList;
 
         /*foreach (var resourceObject in allResourceObjects)
@@ -54,7 +54,7 @@ public class ResourceObjects : MonoBehaviour
         List<Resource> returnList = new List<Resource>();
         returnList = allResourceObjects.FindAll(resource => resource.resourceData.resourceType == resourceType);
         
-        Debug.Log(returnList);
+        Debug.Log("Найденные ресурсы: "+ returnList.ToString());
         return returnList;
     }
 }
