@@ -7,14 +7,25 @@ using UnityEngine;
 [Serializable]
 public class AllResouceTypes
 {
-    [SerializeField]
-    public List<ResourceData> allResourceDatas;
-    
     public enum ResourceType
     {
-        Wood,
-        Stone,
-        Water,
-        Food
+        Вода,
+        Огонь,
+        Земля,
+        Воздух,
+        Металл,
+        Глина,
+        Дерево,
+        Спирт,
+        Инструмент,
+        Костер,
+        Доска,
+        Бумага,
+        Жизнь,
+        Плод,
+        Деньга,
+        ДеревянныйДруг,
+        Кошка,
+        Шляпа
     }
 }

@@ -30,15 +30,18 @@ public class Resource : MonoBehaviour
 
     private void Start()
     {
+        if (transform.parent != ResourceObjects.Instance.gameObject.transform)
+            transform.SetParent(ResourceObjects.Instance.gameObject.transform);
+        
         NavMeshBaker.Instance.Bake();
-        transform.SetParent(ResourceObjects.Instance.gameObject.transform);
-        ResourceObjects.Instance.allResourceObjects.Add(this);
+        ResourceObjects.Instance.AddToList(this);
     }
+
+    
 
     private void OnDestroy()
     {
         NavMeshBaker.Instance.Bake();
-        
-        ResourceObjects.Instance.allResourceObjects.Remove(this);
+        ResourceObjects.Instance.RemoveFromList(this);
     }
 }

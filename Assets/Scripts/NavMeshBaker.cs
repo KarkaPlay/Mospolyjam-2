@@ -21,11 +21,12 @@ public class NavMeshBaker : MonoBehaviour
         } 
         
         DontDestroyOnLoad(gameObject);
+        
+        _navMeshSurface = GetComponent<NavMeshSurface>();
     }
 
     private void Start()
     {
-        _navMeshSurface = GetComponent<NavMeshSurface>();
         _navMeshSurface.BuildNavMeshAsync();
     }
 

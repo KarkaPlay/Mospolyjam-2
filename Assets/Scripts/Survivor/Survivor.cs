@@ -53,8 +53,8 @@ public class Survivor : MonoBehaviour
     void Start()
     {
         SetupNavAgent();
-        
-        FindResource(AllResouceTypes.ResourceType.Wood, true);
+        StartWalking();
+        //FindResource(AllResouceTypes.ResourceType.Дерево, true);
     }
 
     /// <summary>
@@ -137,12 +137,12 @@ public class Survivor : MonoBehaviour
         
         if (water < 30)
         {
-            FindResource(AllResouceTypes.ResourceType.Water, true);
+            FindResource(AllResouceTypes.ResourceType.Вода, true);
         }
 
         if (food < 40)
         {
-            FindResource(AllResouceTypes.ResourceType.Food, true);
+            FindResource(AllResouceTypes.ResourceType.Плод, true);
         }
     }
 
@@ -217,11 +217,11 @@ public class Survivor : MonoBehaviour
             yield return new WaitForSeconds(2f);
             switch (resourceToCollect.resourceData.resourceType)
             {
-                case AllResouceTypes.ResourceType.Water:
+                case AllResouceTypes.ResourceType.Вода:
                     Debug.Log("Пытаемся собрать воду");
                     CollectResource(resourceToCollect, ref water);
                     break;
-                case AllResouceTypes.ResourceType.Food:
+                case AllResouceTypes.ResourceType.Плод:
                     CollectResource(resourceToCollect, ref food);
                     break;
                 default:
