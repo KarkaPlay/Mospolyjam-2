@@ -6,8 +6,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Новый ресурс", menuName = "Ресурс", order = 51)]
 public class ResourceData : ScriptableObject
 {
-    [SerializeField] private string resourceName;
-    [SerializeField] private string description;
+    [SerializeField] public string resourceName;
+    [TextArea(1,5)]
+    public List<string> descriptions;
     [SerializeField] private int resourceID;
-    [SerializeField] public AllResouceTypes.ResourceType resourceType;
+    public AllResouceTypes.ResourceType resourceType;
+    
+    /// <summary>
+    /// Сколько единиц ресурса нужно игроку
+    /// </summary>
+    public int survivorNeed;
 }

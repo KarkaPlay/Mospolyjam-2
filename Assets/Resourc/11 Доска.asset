@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98afdfbe667a6b44a80637d20d35bf24, type: 3}
-  m_Name: Stone
+  m_Name: "11 \u0414\u043E\u0441\u043A\u0430"
   m_EditorClassIdentifier: 
-  resourceName: "\u041A\u0430\u043C\u0435\u043D\u044C"
-  description: 
-  resourceID: 1
-  resourceType: 1
+  resourceName: "\u0414\u043E\u0441\u043A\u0430"
+  descriptions:
+  - 
+  resourceID: 0
+  resourceType: 10
+  survivorNeed: 0

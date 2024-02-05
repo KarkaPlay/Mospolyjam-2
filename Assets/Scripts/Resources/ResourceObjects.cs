@@ -8,10 +8,10 @@ public class ResourceObjects : MonoBehaviour
 {
     public static ResourceObjects Instance;
 
-    public List<Resource> allResourceObjects;
+    [SerializeField] private List<Resource> allResourceObjects;
     public AllResouceTypes allResourceTypes;
     
-    void Start()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -21,7 +21,10 @@ public class ResourceObjects : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+    }
+
+    private void Start()
+    {
         SetAllObjects();
     }
 
@@ -29,32 +32,36 @@ public class ResourceObjects : MonoBehaviour
     {
         allResourceObjects = GetComponentsInChildren<Resource>().ToList();
     }
-
-    public List<Resource> FindResources(ResourceData resourceData)
-    {
-        List<Resource> returnList = new List<Resource>();
-        returnList = allResourceObjects.FindAll(resource => resource.resourceData == resourceData);
-        
-        Debug.Log(returnList);
-        return returnList;
-
-        /*foreach (var resourceObject in allResourceObjects)
-        {
-            if (resourceObject.resourceData == resourceData)
-            {
-                returnList.Add(resourceObject);
-            }
-        }
-
-        return returnList;*/
-    }
     
+    // TODO: Если нужных ресурсов не найдено, показывается иконка
     public List<Resource> FindResources(AllResouceTypes.ResourceType resourceType)
     {
         List<Resource> returnList = new List<Resource>();
         returnList = allResourceObjects.FindAll(resource => resource.resourceData.resourceType == resourceType);
         
-        Debug.Log(returnList);
         return returnList;
+    }
+
+    public void AddToList(Resource resourceToAdd)
+    {
+        Debug.Log($"Добавляем ресурс {resourceToAdd.resourceData.resourceName} в список");
+        if (!allResourceObjects.Find(resource => resource.resourceData == resourceToAdd.resourceData))
+        {
+            Progress.Instance.UnlockAchievement(resourceToAdd.resourceData.resourceType.ToString());
+        }
+        
+        allResourceObjects.Add(resourceToAdd);
+    }
+
+    public void RemoveFromList(Resource resourceToRemove)
+    {
+        if (allResourceObjects.Contains(resourceToRemove))
+        {
+            allResourceObjects.Remove(resourceToRemove);
+        }
+        else
+        {
+            Debug.LogAssertion("Попытка удалить ресурс, которого нет в списке");
+        }
     }
 }
