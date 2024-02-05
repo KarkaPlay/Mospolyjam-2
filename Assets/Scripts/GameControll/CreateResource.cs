@@ -10,13 +10,13 @@ public class CreateResource : MonoBehaviour
     public GameObject prefab;
     public Canvas popup;
     public TMP_Text textMeshPro;
-    Resource resource;
     double time = 0;
+    string achievementName;
 
 
     public void Start()
     {
-        resource = prefab.GetComponent<Resource>();
+        achievementName = prefab.GetComponent<Resource>().resourceData.resourceType.ToString();
     }
     // Update is called once per frame
     public void Update()
@@ -25,8 +25,9 @@ public class CreateResource : MonoBehaviour
         //по нажатию мышки
         if (Input.GetMouseButtonDown(0))
         {
-            if (resource.count==0)
+            if (!Progress.Instance.achievements.Find(achievement => achievement.achName == achievementName).GetStatus())
             {
+                Progress.Instance.UnlockAchievement(achievementName);
                 CreatePopup();
             }
             SpawnPrefab();
@@ -46,7 +47,7 @@ public class CreateResource : MonoBehaviour
     //создаёт всплывающее окно
     private void CreatePopup()
     {
-        textMeshPro.text = "Было создано дерево"; //текст к каждому действию должен быть разный, переменную в ресурсе, куча if либо наследовать класс для каждого ресурса? 
+        textMeshPro.text = Progress.Instance.achievements.Find(achievement => achievement.achName == achievementName).message;
         popup.gameObject.SetActive(true);
         //Поле исчезает через 10 секунд, сделать по нажатию?
         time = 10;       
@@ -55,7 +56,6 @@ public class CreateResource : MonoBehaviour
     //создаёт ресурс
     private void SpawnPrefab()
     {
-        resource.count += 1;
         Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Instantiate(prefab, target, Quaternion.identity);
     }

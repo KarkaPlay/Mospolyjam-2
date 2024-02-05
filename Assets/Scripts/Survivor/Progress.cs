@@ -20,6 +20,11 @@ public class Achievement
         this.status = status;
     }
 
+    public bool GetStatus()
+    {
+        return status;
+    }
+
     public void ChangeStatus()
     {
         status = true;
