@@ -9,9 +9,10 @@ public class HatEvent : MonoBehaviour
     bool ThreeHats = false;
     bool SevenHats = false;
     bool ManyHats = false;
+    public int numberOfHats;
     void FixedUpdate()
     {
-        int numberOfHats = AllResourceDatas.Instance.allResourceDatas.FindAll(x => x.resourceType == AllResouceTypes.ResourceType.Ўл€па).Count;
+        
         if (numberOfHats == 3 && !ThreeHats)
         {
             ThreeHats = true;

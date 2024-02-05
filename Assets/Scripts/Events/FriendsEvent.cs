@@ -8,11 +8,11 @@ public class FriendsEvent : MonoBehaviour
 {
     bool FiveFriends = false;
     bool ManyFriends = false;
-
+    public int numberOfFriends=0;
     // Update is called once per frame
     void FixedUpdate()
     {
-        int numberOfFriends = AllResourceDatas.Instance.allResourceDatas.FindAll(x => x.resourceType == AllResouceTypes.ResourceType.ƒерев€нныйƒруг).Count;
+        
         if(numberOfFriends == 5 && !FiveFriends)
         {
             FiveFriends = true;
