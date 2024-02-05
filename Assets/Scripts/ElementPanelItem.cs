@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class ElementPanelItem : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     private GameObject itemBeingDragged;
+    private GameObject itemDragged;
     public Canvas canvas;
-    public string itemElement;
+    //public GameObject resourceObjects;
+    public GameObject itemElement;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -22,7 +25,13 @@ public class ElementPanelItem : MonoBehaviour, IPointerDownHandler, IDragHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log(itemElement + ", position: " + itemBeingDragged.transform.position);
+        Vector3 mousePosition = Input.mousePosition;
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        worldPosition += new Vector3(0, 0, 10);
+        itemDragged = Instantiate(itemElement, worldPosition, Quaternion.identity);
+        //itemDragged.transform.SetParent(resourceObjects.transform);
+        Debug.Log(", position: " + itemBeingDragged.transform.position);
         Destroy(itemBeingDragged);
+        
     }
 }
