@@ -42,10 +42,7 @@ public class Progress : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
+        
         achievements = new List<Achievement>()
         {
             new("Вода"),
