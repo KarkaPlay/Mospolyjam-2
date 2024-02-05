@@ -27,11 +27,12 @@ public class NavMeshBaker : MonoBehaviour
 
     private void Start()
     {
-        _navMeshSurface.BuildNavMeshAsync();
+        _navMeshSurface.BuildNavMesh();
     }
 
     public void Bake()
     {
-        _navMeshSurface.UpdateNavMesh(_navMeshSurface.navMeshData);
+        //_navMeshSurface.UpdateNavMesh(_navMeshSurface.navMeshData);
+        _navMeshSurface.BuildNavMeshAsync();
     }
 }
