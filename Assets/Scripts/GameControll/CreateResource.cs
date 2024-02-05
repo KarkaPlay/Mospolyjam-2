@@ -16,7 +16,7 @@ public class CreateResource : MonoBehaviour
 
     public void Start()
     {
-        achievementName = prefab.GetComponent<Resource>().resourceData.resourceType.ToString();
+        achievementName = prefab.GetComponent<Resource>().resourceData.resourceName;
     }
     // Update is called once per frame
     public void Update()
