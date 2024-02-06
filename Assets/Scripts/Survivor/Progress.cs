@@ -132,6 +132,7 @@ public class Progress : MonoBehaviour
     public void UnlockAchievement(string achievementName)
     {
         achievements.Find(achievement => achievement.achName == achievementName).ChangeStatus();
-        Debug.Log($"Разблокирован элемент {achievementName}");
+        Debug.LogAssertion($"Разблокирован элемент {achievementName}");
+        Debug.LogAssertion(achievements.Find(achievement => achievement.achName == achievementName).message);
     }
 }
