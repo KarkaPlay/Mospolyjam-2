@@ -37,8 +37,6 @@ public class Resource : MonoBehaviour
         ResourceObjects.Instance.AddToList(this);
     }
 
-    
-
     private void OnDestroy()
     {
         NavMeshBaker.Instance.Bake();
