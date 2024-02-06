@@ -10,7 +10,6 @@ public class Survivor : MonoBehaviour
     private float _hp;
     private float _water;
     private float _food;
-    private float _sleep;
     private float _sanity;
     private float _temperature;
     private float _speed;
@@ -57,20 +56,6 @@ public class Survivor : MonoBehaviour
                 _food = 100;
         }
     }
-    public float Sleep
-    {
-        get => _sleep;
-        set
-        {
-            _sleep = value;
-            
-            if (_sleep < 0)
-                _sleep = 0;
-            
-            else if (_sleep > 100)
-                _sleep = 100;
-        }
-    }
     public float Sanity
     {
         get => _sanity;
@@ -114,12 +99,9 @@ public class Survivor : MonoBehaviour
         { "HP",     1f },
         { "Water",  1f },
         { "Food",   1f },
-        { "Sleep",  1f },
         { "Sanity", 1f },
         { "Temperature", 1f }
     };
-
-    public Inventory inventory;
     
     private enum State
     {
@@ -164,7 +146,6 @@ public class Survivor : MonoBehaviour
         HP = 100;
         Water = 100;
         Food = 100;
-        Sleep = 100;
         Sanity = 100;
         Temperature = 100;
     }
@@ -198,8 +179,6 @@ public class Survivor : MonoBehaviour
             Water += value;
         else if (paramNum == 3)
             Food += value;
-        else if (paramNum == 4)
-            Sleep += value;
         else if (paramNum == 5)
             Sanity += value;
         else if (paramNum == 6)
@@ -229,7 +208,6 @@ public class Survivor : MonoBehaviour
                 { "HP",         -0f },
                 { "Water",      -0.5f },
                 { "Food",       -0.5f },
-                { "Sleep",      -0.5f },
                 { "Sanity",     -0.3f },
                 { "Temperature", 0.5f }
             },
@@ -238,7 +216,6 @@ public class Survivor : MonoBehaviour
                 { "HP",         -0f },
                 { "Water",      -0.4f },
                 { "Food",       -0.4f },
-                { "Sleep",      -1f },
                 { "Sanity",     -0.5f },
                 { "Temperature", 0f }
             },
@@ -247,7 +224,6 @@ public class Survivor : MonoBehaviour
                 { "HP",         -0f },
                 { "Water",      -0.25f },
                 { "Food",       -0.25f },
-                { "Sleep",      -2f },
                 { "Sanity",     -1f },
                 { "Temperature", -0.5f }
             },
@@ -256,7 +232,6 @@ public class Survivor : MonoBehaviour
                 { "HP",         -0f },
                 { "Water",      -0.4f },
                 { "Food",       -0.4f },
-                { "Sleep",      -1f },
                 { "Sanity",     -0.5f },
                 { "Temperature", 0f }
             },
@@ -272,9 +247,6 @@ public class Survivor : MonoBehaviour
         else if (Water > 80 && Food > 80)
             modifiers[nameof(HP)] += 1f;
         
-        if (Sleep < 20)
-            modifiers[nameof(HP)] -= 0.5f;
-        
         if (Sanity < 25)
             modifiers[nameof(HP)] -= 0.5f;
         
@@ -287,7 +259,6 @@ public class Survivor : MonoBehaviour
         HP += modifiers[nameof(HP)] * Time.deltaTime * difficulty;
         Water += modifiers[nameof(Water)] * Time.deltaTime * difficulty;
         Food += modifiers[nameof(Food)] * Time.deltaTime * difficulty;
-        Sleep += modifiers[nameof(Sleep)] * Time.deltaTime * difficulty;
         Sanity += modifiers[nameof(Sanity)] * Time.deltaTime * difficulty;
         Temperature += modifiers[nameof(Temperature)] * Time.deltaTime * difficulty;
     }
@@ -307,11 +278,6 @@ public class Survivor : MonoBehaviour
         if (Food < 40)
         {
             FindResource(AllResouceTypes.ResourceType.Плод, true);
-        }
-
-        if (Sleep < 30)
-        {
-            // Спим
         }
 
         if (Sanity < 30)
