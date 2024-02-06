@@ -30,22 +30,12 @@ public class Resource : MonoBehaviour
 
     private void Start()
     {
-        if(resourceData.resourceType == AllResouceTypes.ResourceType.ДеревянныйДруг)
-        {
-            GetComponent<FriendsEvent>().numberOfFriends++;
-        }
-        if(resourceData.resourceType == AllResouceTypes.ResourceType.Шляпа)
-        {
-            GetComponent<HatEvent>().numberOfHats++;
-        }
         if (transform.parent != ResourceObjects.Instance.gameObject.transform)
             transform.SetParent(ResourceObjects.Instance.gameObject.transform);
         
         NavMeshBaker.Instance.Bake();
         ResourceObjects.Instance.AddToList(this);
     }
-
-    
 
     private void OnDestroy()
     {

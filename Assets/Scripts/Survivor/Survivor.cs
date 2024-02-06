@@ -179,6 +179,17 @@ public class Survivor : MonoBehaviour
         navAgent.updateUpAxis = false;
     }
 
+    /// <summary>
+    /// Изменяет параметр номер paramNum на value
+    /// </summary>
+    /// <param name="paramNum">Номер параметра, который будет изменяться.
+    /// <para>1 - HP</para>
+    /// 2 - Water
+    /// <para>3 - Food</para>
+    /// 4 - Sleep
+    /// <para>5 - Sanity</para>
+    /// 6 - Temperature</param>
+    /// <param name="value">Значение, на которое будет изменен параметр</param>
     public void ChangeParameter(int paramNum, float value)
     {
         if (paramNum == 1)

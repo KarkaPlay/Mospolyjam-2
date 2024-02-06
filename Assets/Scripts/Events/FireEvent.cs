@@ -1,27 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 //Событие при пожаре
 public class FireEvent : MonoBehaviour
 {
+    private bool isOnTree;
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Start()
     {
-        if (true) //есть пожар или нет
+        InvokeRepeating(nameof(TryCallFireEvent), 5, 2);
+        Survivor.Instance.ChangeParameter(6, 20);
+        if (isOnTree)
         {
-            int random = Random.Range(1,100);
-            if (random <= 10)
-            {
-                CallFireEvent();
-            }
+            Survivor.Instance.ChangeParameter(5, -20);
         }
     }
+
+    private void TryCallFireEvent()
+    {
+        int random = Random.Range(1,100);
+        if (random <= 10)
+        {
+            CallFireEvent();
+        }
+    }
+    
     public void CallFireEvent()
     {
-        //Изменение характеристик (минус хп)
+        Survivor.Instance.ChangeParameter(1, 30);
         //вывод сообщения (Роби обжегся)
     }
 }

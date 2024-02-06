@@ -36,6 +36,65 @@ public class Progress : MonoBehaviour
     public List<Achievement> achievements;
 
     public static Progress Instance;
+    
+    // TODO: Сделать вывод окон сообщений
+    
+    // Прогресс по шляпам
+    public int numOfHats;
+    private bool threeHats = false, sevenHats = false, TwentyHats = false;
+    public void AddHat()
+    {
+        numOfHats++;
+        
+        if (numOfHats == 3 && !threeHats)
+        {
+            threeHats = true;
+            Debug.LogAssertion("У Роби теперь большой выбор шляп");
+            //вывод сообщения (У Роби теперь большой выбор шляп)
+        }
+        if (numOfHats == 7 && !sevenHats)
+        {
+            sevenHats = true;
+            Debug.LogAssertion("Роби не знает что надеть");
+            //вывод сообщения (Роби не знает что надеть)
+        }
+        if (numOfHats == 20 && !TwentyHats)
+        {
+            TwentyHats = true;
+            Debug.LogAssertion("Маскарад шляп! Роби занял первое место и выиграл 100 денег");
+            //вывод сообщения (Маскарад шляп! Роби занял первое место и выиграл 100 денег)
+        }
+    }
+    
+    
+    // Прогресс по деревянным друзьям
+    public int numOfFriends;
+    private bool oneFriend = false, fiveFriends = false, twentyFriends = false;
+    public void AddFriend()
+    {
+        numOfFriends++;
+        
+        if (numOfFriends == 1 && !oneFriend)
+        {
+            oneFriend = true;
+            Debug.LogAssertion(AllResourceDatas.Instance.Find(AllResouceTypes.ResourceType.ДеревянныйДруг).descriptions[0]);
+            
+            //вывод сообщения
+        }
+        if (numOfFriends == 5 && !fiveFriends)
+        {
+            fiveFriends = true;
+            Debug.LogAssertion(AllResourceDatas.Instance.Find(AllResouceTypes.ResourceType.ДеревянныйДруг).descriptions[1]);
+            //вывод сообщения
+        }
+        if (numOfFriends == 20 && !twentyFriends)
+        {
+            twentyFriends = true;
+            Debug.LogAssertion(AllResourceDatas.Instance.Find(AllResouceTypes.ResourceType.ДеревянныйДруг).descriptions[2]);
+            //вывод сообщения
+        }
+    }
+    
 
     private void Awake()
     {

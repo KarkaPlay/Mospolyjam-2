@@ -1,25 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 //Событие инструментов
 public class ToolEvent : MonoBehaviour
 {
-    // Update is called once per frame
-    void FixedUpdate()
+    public void TryCallToolEvent()
     {
-        if (Progress.Instance.achievements.Find(achievement => achievement.achName == "Инструмент").GetStatus())
+        int random = Random.Range(1, 100);
+        if (random <= 10)
         {
-            int random = Random.Range(1, 100);
-            if (random <= 10)
-            {
-                CallToolEvent();
-            }
+            CallToolEvent();
         }
     }
-    public void CallToolEvent()
+    
+    private void CallToolEvent()
     {
-        //изменение характеристик (минус хп)
-        //вывод сообщения (Роби поранился инструментом)
+        Survivor.Instance.ChangeParameter(1, 30);
+        Debug.LogWarning("Роби поранился инструментом");
+        //TODO: вывод сообщения (Роби поранился инструментом)
     }
 }
