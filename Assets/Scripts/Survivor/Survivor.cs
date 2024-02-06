@@ -7,32 +7,117 @@ using Random = UnityEngine.Random;
 
 public class Survivor : MonoBehaviour
 {
-    public float hp;
-    public float water;
-    public float food;
-    public float sleep;
-    public float sanity;
-    public float temperature;
-    private float speed;
+    private float _hp;
+    private float _water;
+    private float _food;
+    private float _sleep;
+    private float _sanity;
+    private float _temperature;
+    private float _speed;
 
-    private Dictionary<string, float> modifiers = new()
+    public float HP
     {
-        { "hp",     1f },
-        { "water",  1f },
-        { "food",   1f },
-        { "sleep",  1f },
-        { "sanity", 1f },
-    };
-    
-    public float Speed
-    {
-        get => speed;
+        get => _hp;
         set
         {
-            speed = value;
+            _hp = value;
+            
+            if (_hp < 0)
+                _hp = 0;
+            
+            else if (_hp > 100)
+                _hp = 100;
+        }
+    }
+    public float Water
+    {
+        get => _water;
+        set
+        {
+            _water = value;
+            
+            if (_water < 0)
+                _water = 0;
+            
+            else if (_water > 100)
+                _water = 100;
+        }
+    }
+    public float Food
+    {
+        get => _food;
+        set
+        {
+            _food = value;
+            
+            if (_food < 0)
+                _food = 0;
+            
+            else if (_food > 100)
+                _food = 100;
+        }
+    }
+    public float Sleep
+    {
+        get => _sleep;
+        set
+        {
+            _sleep = value;
+            
+            if (_sleep < 0)
+                _sleep = 0;
+            
+            else if (_sleep > 100)
+                _sleep = 100;
+        }
+    }
+    public float Sanity
+    {
+        get => _sanity;
+        set
+        {
+            _sanity = value;
+            
+            if (_sanity < 0)
+                _sanity = 0;
+            
+            else if (_sanity > 100)
+                _sanity = 100;
+        }
+    }
+    public float Temperature
+    {
+        get => _temperature;
+        set
+        {
+            _temperature = value;
+            
+            if (_temperature < 0)
+                _temperature = 0;
+            
+            else if (_temperature > 100)
+                _temperature = 100;
+        }
+    }
+    public float Speed
+    {
+        get => _speed;
+        set
+        {
+            _speed = value;
             navAgent.speed = value;
         }
     }
+
+    private Dictionary<string, float> modifiers = new()
+    {
+        { "HP",     1f },
+        { "Water",  1f },
+        { "Food",   1f },
+        { "Sleep",  1f },
+        { "Sanity", 1f },
+        { "Temperature", 1f }
+    };
 
     public Inventory inventory;
     
@@ -49,12 +134,39 @@ public class Survivor : MonoBehaviour
     
     [SerializeField] private NavMeshAgent navAgent;
     [SerializeField] private GameObject targetObject;
-    
+
+    public static Survivor Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         SetupNavAgent();
+        SetupParameters();
         StartWalking();
-        //FindResource(AllResouceTypes.ResourceType.Дерево, true);
+    }
+
+    /// <summary>
+    /// Выставляет все жизненные параметры на 100
+    /// </summary>
+    private void SetupParameters()
+    {
+        HP = 100;
+        Water = 100;
+        Food = 100;
+        Sleep = 100;
+        Sanity = 100;
+        Temperature = 100;
     }
 
     /// <summary>
@@ -66,6 +178,24 @@ public class Survivor : MonoBehaviour
         navAgent.updateRotation = false;
         navAgent.updateUpAxis = false;
     }
+
+    public void ChangeParameter(int paramNum, float value)
+    {
+        if (paramNum == 1)
+            HP += value;
+        else if (paramNum == 2)
+            Water += value;
+        else if (paramNum == 3)
+            Food += value;
+        else if (paramNum == 4)
+            Sleep += value;
+        else if (paramNum == 5)
+            Sanity += value;
+        else if (paramNum == 6)
+            Temperature += value;
+        else
+            Debug.LogAssertion($"Параметры: 1-6. Попытка изменить параметр №{paramNum}");
+    }
     
     void Update()
     {
@@ -73,59 +203,82 @@ public class Survivor : MonoBehaviour
         CheckNeeds();
         CheckDistanceToTarget();
     }
-
-    // TODO: Добавить больше модификаторов
+    
     /// <summary>
     /// Постепенно уменьшает жизненные характеристики человека, используя модификаторы времени суток и другие
     /// </summary>
     private void Starve()
     {
-        // Чем больше модификатор, тем быстрее это тратится
+        // Чем модификатор сеньше нуля, тем быстрее это тратится
 
         modifiers = TimeOfDay.currentDayTime switch
         {
             TimeOfDay.DayTime.Day => new()
             {
-                { "hp", 0f },
-                { "water", 0.5f },
-                { "food", 0.5f },
-                { "sleep", 0.5f },
-                { "sanity", 0.3f }
+                { "HP",         -0f },
+                { "Water",      -0.5f },
+                { "Food",       -0.5f },
+                { "Sleep",      -0.5f },
+                { "Sanity",     -0.3f },
+                { "Temperature", 0.5f }
             },
             TimeOfDay.DayTime.Evening => new()
             {
-                { "hp", 0f },
-                { "water", 0.4f },
-                { "food", 0.4f },
-                { "sleep", 1f },
-                { "sanity", 0.5f }
+                { "HP",         -0f },
+                { "Water",      -0.4f },
+                { "Food",       -0.4f },
+                { "Sleep",      -1f },
+                { "Sanity",     -0.5f },
+                { "Temperature", 0f }
             },
             TimeOfDay.DayTime.Night => new()
             {
-                { "hp", 0f },
-                { "water", 0.25f },
-                { "food", 0.25f },
-                { "sleep", 2f },
-                { "sanity", 1f }
+                { "HP",         -0f },
+                { "Water",      -0.25f },
+                { "Food",       -0.25f },
+                { "Sleep",      -2f },
+                { "Sanity",     -1f },
+                { "Temperature", -0.5f }
             },
             TimeOfDay.DayTime.Morning => new()
             {
-                { "hp", 0f },
-                { "water", 0.4f },
-                { "food", 0.4f },
-                { "sleep", 1f },
-                { "sanity", 0.5f }
+                { "HP",         -0f },
+                { "Water",      -0.4f },
+                { "Food",       -0.4f },
+                { "Sleep",      -1f },
+                { "Sanity",     -0.5f },
+                { "Temperature", 0f }
             },
             _ => modifiers
         };
+
+        if (Water < 25)
+            modifiers[nameof(HP)] -= 0.5f;
+
+        if (Food < 35)
+            modifiers[nameof(HP)] -= 0.5f;
+        
+        else if (Water > 80 && Food > 80)
+            modifiers[nameof(HP)] += 1f;
+        
+        if (Sleep < 20)
+            modifiers[nameof(HP)] -= 0.5f;
+        
+        if (Sanity < 25)
+            modifiers[nameof(HP)] -= 0.5f;
+        
+        if (Temperature < 20)
+            modifiers[nameof(HP)] -= 0.5f;
         
         // УДАЛИТЬ!!!
         float difficulty = 1;
         
-        water -= modifiers[nameof(water)] * Time.deltaTime * difficulty;
-        food -= modifiers[nameof(food)] * Time.deltaTime * difficulty;
-        sleep -= modifiers[nameof(sleep)] * Time.deltaTime * difficulty;
-        sanity -= modifiers[nameof(sanity)] * Time.deltaTime * difficulty;
+        HP += modifiers[nameof(HP)] * Time.deltaTime * difficulty;
+        Water += modifiers[nameof(Water)] * Time.deltaTime * difficulty;
+        Food += modifiers[nameof(Food)] * Time.deltaTime * difficulty;
+        Sleep += modifiers[nameof(Sleep)] * Time.deltaTime * difficulty;
+        Sanity += modifiers[nameof(Sanity)] * Time.deltaTime * difficulty;
+        Temperature += modifiers[nameof(Temperature)] * Time.deltaTime * difficulty;
     }
 
     /// <summary>
@@ -135,14 +288,29 @@ public class Survivor : MonoBehaviour
     {
         if (currentState is not (State.Idle or State.WalkingAround)) return;
         
-        if (water < 30)
+        if (Water < 30)
         {
             FindResource(AllResouceTypes.ResourceType.Вода, true);
         }
 
-        if (food < 40)
+        if (Food < 40)
         {
             FindResource(AllResouceTypes.ResourceType.Плод, true);
+        }
+
+        if (Sleep < 30)
+        {
+            // Спим
+        }
+
+        if (Sanity < 30)
+        {
+            // Вырезает друзей, если они разблокированы
+        }
+
+        if (Temperature < 30)
+        {
+            FindResource(AllResouceTypes.ResourceType.Костер, true);
         }
     }
 
@@ -209,7 +377,7 @@ public class Survivor : MonoBehaviour
     private IEnumerator CollectingResource(Resource resourceToCollect)
     {
         currentState = State.CollectingResource;
-        speed = 0;
+        _speed = 0;
         Debug.Log($"Начали собирать ресурс {resourceToCollect.resourceData.resourceType.ToString()}");
         
         while (currentState == State.CollectingResource)
@@ -219,10 +387,10 @@ public class Survivor : MonoBehaviour
             {
                 case AllResouceTypes.ResourceType.Вода:
                     Debug.Log("Пытаемся собрать воду");
-                    CollectResource(resourceToCollect, ref water);
+                    CollectResource(resourceToCollect, ref _water);
                     break;
                 case AllResouceTypes.ResourceType.Плод:
-                    CollectResource(resourceToCollect, ref food);
+                    CollectResource(resourceToCollect, ref _food);
                     break;
                 default:
                     Debug.LogAssertion($"Сбор ресурса {resourceToCollect.resourceData.resourceType} не прописан в Survivor.CollectingResource()");
@@ -283,13 +451,30 @@ public class Survivor : MonoBehaviour
         Debug.Log($"Начали искать ресурс {_resourceType.ToString()}");
         
         // TODO: Искать не 0-й объект списка, а ближайший к человеку
-        var foundResource = ResourceObjects.Instance.FindResources(_resourceType)[0];
-
-        if (needToGo)
+        var foundResources = ResourceObjects.Instance.FindResources(_resourceType);
+        
+        Resource closestResource = foundResources[0];
+        float closestDistance = Mathf.Infinity;
+        foreach (var foundResource in foundResources)
         {
-            GoTo(foundResource.gameObject);
+            var distanceToResource = Vector3.Distance(transform.position, foundResource.transform.position);
+            if (distanceToResource < closestDistance)
+            {
+                closestDistance = distanceToResource;
+                closestResource = foundResource;
+            }
+        }
+
+        if (closestDistance != Mathf.Infinity)
+        {
+            if (needToGo)
+            {
+                GoTo(closestResource.gameObject);
+            }
+
+            return closestResource;
         }
         
-        return foundResource;
+        return null;
     }
 }

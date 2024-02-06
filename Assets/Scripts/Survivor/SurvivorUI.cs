@@ -21,10 +21,10 @@ public class SurvivorUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HPScale.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _survivor.hp * 3);
-        WaterScale.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _survivor.water * 3);
-        FoodScale.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _survivor.food * 3);
-        SleepScale.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _survivor.sleep * 3);
-        SanityScale.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _survivor.sanity * 3);
+        HPScale.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _survivor.HP * 3);
+        WaterScale.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _survivor.Water * 3);
+        FoodScale.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _survivor.Food * 3);
+        SleepScale.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _survivor.Sleep * 3);
+        SanityScale.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _survivor.Sanity * 3);
     }
 }
