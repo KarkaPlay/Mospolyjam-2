@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Events
 {
@@ -7,6 +8,8 @@ namespace Events
         private void Start()
         {
             Survivor.Instance.ChangeParameter(5, 30);
+            //Запуск победной сцены, если сделать не моментально после создания, то надо переместить
+            SceneManager.LoadScene("VictoryScreen");
         }
     }
 }
