@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1214699989088704995}
   - component: {fileID: 2690607404949351370}
   m_Layer: 0
-  m_Name: "\u0417\u0435\u043C\u043B\u044F"
+  m_Name: "10 \u041A\u043E\u0441\u0442\u0435\u0440"
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49daf8e7b1fd2b645ac467625af78f38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceData: {fileID: 11400000, guid: 3e05506d1faeeaf4eb29d11e6e7960ea, type: 2}
+  resourceData: {fileID: 11400000, guid: 6f02d40ae22fec74b8326f9251641be2, type: 2}
   count: 1
   oneTake: 10
 --- !u!58 &3937394800442821033
@@ -146,7 +146,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3878557786174838139, guid: da6a924df60e61144a4c3f31ca392f0b, type: 3}
+  m_Sprite: {fileID: 8334651344603559088, guid: 829eff44bfe5ba14888425e2c2b263cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d232f1e4b85384f96345de4424222d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!50 &2690607404949351370
 Rigidbody2D:
   serializedVersion: 4

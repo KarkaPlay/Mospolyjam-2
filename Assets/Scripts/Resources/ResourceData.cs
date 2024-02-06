@@ -16,4 +16,6 @@ public class ResourceData : ScriptableObject
     /// Сколько единиц ресурса нужно игроку
     /// </summary>
     public int survivorNeed;
+
+    public List<Recipe> recipes;
 }

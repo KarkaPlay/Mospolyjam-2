@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1214699989088704995}
   - component: {fileID: 2690607404949351370}
   m_Layer: 0
-  m_Name: "\u0413\u043B\u0438\u043D\u0430"
+  m_Name: "11 \u0414\u043E\u0441\u043A\u0430"
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49daf8e7b1fd2b645ac467625af78f38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceData: {fileID: 11400000, guid: a7dd71b6ccda6ec448bb7516ec9f182d, type: 2}
+  resourceData: {fileID: 11400000, guid: 7446abb2d63bddd47854c9dd22a3561a, type: 2}
   count: 1
   oneTake: 10
 --- !u!58 &3937394800442821033
@@ -146,7 +146,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 394424320232930180, guid: 95e2013e14f255942a1e1c14f8b3ce59, type: 3}
+  m_Sprite: {fileID: 1763014460331064234, guid: 239624b9e1ae17b46a39142f8437d36c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d232f1e4b85384f96345de4424222d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!50 &2690607404949351370
 Rigidbody2D:
   serializedVersion: 4
