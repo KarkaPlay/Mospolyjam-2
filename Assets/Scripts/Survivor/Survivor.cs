@@ -113,6 +113,7 @@ public class Survivor : MonoBehaviour
     [SerializeField] private State currentState;
 
     private float distanceToTarget;
+    public float timer = 20;
     
     [SerializeField] private NavMeshAgent navAgent;
     [SerializeField] private GameObject targetObject;
@@ -192,6 +193,8 @@ public class Survivor : MonoBehaviour
         Starve();
         CheckNeeds();
         CheckDistanceToTarget();
+
+        timer -= 1 * Time.deltaTime;
     }
     
     /// <summary>
@@ -199,7 +202,7 @@ public class Survivor : MonoBehaviour
     /// </summary>
     private void Starve()
     {
-        // Чем модификатор сеньше нуля, тем быстрее это тратится
+        // Чем модификатор меньше нуля, тем быстрее это тратится
 
         modifiers = TimeOfDay.currentDayTime switch
         {
@@ -254,7 +257,7 @@ public class Survivor : MonoBehaviour
             modifiers[nameof(HP)] -= 0.5f;
         
         // УДАЛИТЬ!!!
-        float difficulty = 1;
+        float difficulty = 5;
         
         HP += modifiers[nameof(HP)] * Time.deltaTime * difficulty;
         Water += modifiers[nameof(Water)] * Time.deltaTime * difficulty;
@@ -269,25 +272,69 @@ public class Survivor : MonoBehaviour
     private void CheckNeeds()
     {
         if (currentState is not (State.Idle or State.WalkingAround)) return;
+
+        if (HP < 30)
+        {
+            TryShowTip(new List<string>()
+            {
+                "Роби чувствует себя неважно",
+                "Роби болен",
+                "Роби срочно нужно лечение"
+            });
+        }
         
-        if (Water < 30)
+        else if (Water < 30)
         {
             FindResource(AllResouceTypes.ResourceType.Вода, true);
+            TryShowTip(new List<string>()
+            {
+                "Роби Нзон хочет пить",
+                "Роби Нзону нужно попить",
+                "Роби Нзон умирает от жажды"
+            });
         }
 
-        if (Food < 40)
+        else if (Food < 40)
         {
             FindResource(AllResouceTypes.ResourceType.Плод, true);
+            TryShowTip(new List<string>()
+            {
+                "У Роби урчит в животе",
+                "Роби Нзон грызет свои ногти от голода",
+                "Роби Нзон рассматривает перспективу подкрепиться песком"
+            });
         }
 
-        if (Sanity < 30)
+        else if (Sanity < 30)
         {
             // Вырезает друзей, если они разблокированы
+            TryShowTip(new List<string>()
+            {
+                "Роби мечтает о живом общении",
+                "Роби чувствует, что теряет рассудок",
+                "Роби считает, что он кот"
+            });
         }
 
-        if (Temperature < 30)
+        else if (Temperature < 30)
         {
             FindResource(AllResouceTypes.ResourceType.Костер, true);
+            TryShowTip(new List<string>()
+            {
+                "Роби Нзону прохладно",
+                "Роби жалеет, что не из чего сделать одеяло",
+                "Роби скоро превратится в ледышку"
+            });
+        }
+    }
+
+    void TryShowTip(List<string> tipTexts)
+    {
+        if (timer < 0)
+        {
+            // Вызываем окошко с подсказкой
+            Debug.LogWarning(tipTexts[Random.Range(0, tipTexts.Count)]);
+            timer = 20;
         }
     }
 
@@ -427,7 +474,6 @@ public class Survivor : MonoBehaviour
         StopCoroutine(Walking());
         Debug.Log($"Начали искать ресурс {_resourceType.ToString()}");
         
-        // TODO: Искать не 0-й объект списка, а ближайший к человеку
         var foundResources = ResourceObjects.Instance.FindResources(_resourceType);
         
         Resource closestResource = foundResources[0];
