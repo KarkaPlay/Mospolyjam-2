@@ -22,3 +22,9 @@ MonoBehaviour:
   recipes:
   - addedItem: {fileID: 11400000, guid: 3e05506d1faeeaf4eb29d11e6e7960ea, type: 2}
     result: {fileID: 4964509250318046728, guid: db359bf3e86509940825e06c1ff45e21, type: 3}
+  - addedItem: {fileID: 11400000, guid: 4079b2fee693e6c409255bdec02c05f2, type: 2}
+    result: {fileID: 6539481794191328837, guid: 06a53f678a1d75b45ab622d466a810e5, type: 3}
+  - addedItem: {fileID: 11400000, guid: 7446abb2d63bddd47854c9dd22a3561a, type: 2}
+    result: {fileID: 2869456712638943247, guid: bff287fea424e93419878f05658ef946, type: 3}
+  - addedItem: {fileID: 11400000, guid: f1d142e57567a164dace5d5a221a76b0, type: 2}
+    result: {fileID: 2869456712638943247, guid: 510888d895b3e67419a4bb5deb976c2b, type: 3}

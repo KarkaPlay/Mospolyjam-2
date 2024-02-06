@@ -28,3 +28,5 @@ MonoBehaviour:
     result: {fileID: 2869456712638943247, guid: d747e5deb0d2b184caba153375aa27e7, type: 3}
   - addedItem: {fileID: 11400000, guid: 1637b587ccb2973449c4aeb523326d3a, type: 2}
     result: {fileID: 2869456712638943247, guid: afad73061fd39dd45bc80193f0dfde9b, type: 3}
+  - addedItem: {fileID: 11400000, guid: ec102a3d37b95b94fa84895821cb6a11, type: 2}
+    result: {fileID: 2869456712638943247, guid: 69d311b22d6dc4441a5b6ecd80d4208d, type: 3}

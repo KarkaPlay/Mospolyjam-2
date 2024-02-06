@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1214699989088704995}
   - component: {fileID: 2690607404949351370}
   - component: {fileID: -8356871454775595782}
+  - component: {fileID: -3286535334156823625}
   m_Layer: 0
   m_Name: "16 \u0414\u0435\u0440\u0435\u0432\u044F\u043D\u043D\u044B\u0439 \u0434\u0440\u0443\u0433"
   m_TagString: Resource
@@ -257,5 +258,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e15d75882a21d4a44853f3d8213bc74b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3286535334156823625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2869456712638943247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c675c86f0affccb4aa4640e1fffe97b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

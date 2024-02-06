@@ -19,4 +19,6 @@ MonoBehaviour:
   resourceID: 0
   resourceType: 7
   survivorNeed: 0
-  recipes: []
+  recipes:
+  - addedItem: {fileID: 11400000, guid: ec102a3d37b95b94fa84895821cb6a11, type: 2}
+    result: {fileID: 2869456712638943247, guid: a7474a28fde561f479d72a1329dbb714, type: 3}

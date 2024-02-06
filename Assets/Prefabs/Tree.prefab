@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 2552198460531585896}
   - component: {fileID: 6132827048346400680}
   - component: {fileID: 3788273186995075482}
+  - component: {fileID: 1634905178985680561}
+  - component: {fileID: 4120543081300204338}
   m_Layer: 0
   m_Name: Tree
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,12 +82,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.23}
-  m_Radius: 0.35
+  m_Offset: {x: 0, y: 0.20454037}
+  m_Radius: 0.32454026
 --- !u!212 &6132827048346400680
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -127,7 +129,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6853316077166303748, guid: 457896f7401f2fc4794cbeff0c05ab68, type: 3}
+  m_Sprite: {fileID: -6783900630120892731, guid: 2ef47713748550f4a99acdf789b6b9bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -153,7 +155,7 @@ MonoBehaviour:
   m_ShadowGroup: 0
   m_Priority: 0
   m_ComponentVersion: 3
-  m_HasRenderer: 0
+  m_HasRenderer: 1
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 0
@@ -173,13 +175,13 @@ MonoBehaviour:
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
-      m_Center: {x: 0, y: 1.2799988, z: 0}
-      m_Extent: {x: 0.7149811, y: 1.2099915, z: 0}
+      m_Center: {x: 0, y: 0.20453644, z: 0}
+      m_Extent: {x: 0.25317383, y: 0.2531662, z: 0}
     m_EdgeProcessing: 1
     m_TrimEdge: 0.07
     m_FlipX: 0
     m_FlipY: 0
-    m_InitialTrim: 0.07
+    m_InitialTrim: 0
   m_CastingOption: 2
   references:
     version: 2
@@ -187,3 +189,28 @@ MonoBehaviour:
     - rid: 1190345669389582338
       type: {class: ShadowShape2DProvider_Collider2D, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &1634905178985680561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4964509250318046728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3efb83b836104f85a6f322df84a3f80e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4120543081300204338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4964509250318046728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d232f1e4b85384f96345de4424222d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0

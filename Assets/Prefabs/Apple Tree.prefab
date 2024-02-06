@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 647305197866215319}
   - component: {fileID: 5992282872705097312}
   - component: {fileID: 4376210421776930406}
+  - component: {fileID: 164688822849410623}
   m_Layer: 0
   m_Name: Apple Tree
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,12 +82,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.23}
-  m_Radius: 0.35
+  m_Offset: {x: -0.059532642, y: -0.6199119}
+  m_Radius: 0.39494514
 --- !u!114 &647305197866215319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +145,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 168682660216055027, guid: f02842edf6ea3614e877df7dad6aa1d2, type: 3}
+  m_Sprite: {fileID: 7367560742058745493, guid: 747a3d1ff9b6e77458dd36b7b0cdf085, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -190,8 +191,8 @@ MonoBehaviour:
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
-      m_Center: {x: 0, y: 0.22999573, z: 0}
-      m_Extent: {x: 0.2786255, y: 0.2786255, z: 0}
+      m_Center: {x: -0.059532166, y: -0.61990356, z: 0}
+      m_Extent: {x: 0.32357025, y: 0.32357788, z: 0}
     m_EdgeProcessing: 1
     m_TrimEdge: 0.07
     m_FlipX: 0
@@ -204,3 +205,16 @@ MonoBehaviour:
     - rid: 1190345669389582342
       type: {class: ShadowShape2DProvider_Collider2D, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &164688822849410623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6539481794191328837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d232f1e4b85384f96345de4424222d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
