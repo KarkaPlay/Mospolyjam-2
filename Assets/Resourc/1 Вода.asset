@@ -20,3 +20,12 @@ MonoBehaviour:
   resourceID: 2
   resourceType: 0
   survivorNeed: 80
+  recipes:
+  - addedItem: {fileID: 11400000}
+    result: {fileID: 756502629858551577, guid: 93a184e4f4224b848ab478621c8af2a7, type: 3}
+  - addedItem: {fileID: 11400000, guid: 3e05506d1faeeaf4eb29d11e6e7960ea, type: 2}
+    result: {fileID: 2869456712638943247, guid: ab341da3bd32bd24e817dcefce92abce, type: 3}
+  - addedItem: {fileID: 11400000, guid: 60a5925c9e43a984d91924f08ffcd199, type: 2}
+    result: {fileID: 2869456712638943247, guid: 81bc720e4c64cd84aa88d2d2387635d2, type: 3}
+  - addedItem: {fileID: 11400000, guid: af44156559b9c3b4eb9f300607ffe3a9, type: 2}
+    result: {fileID: 2869456712638943247, guid: 81249b37191309140b85a67136ad6c15, type: 3}
