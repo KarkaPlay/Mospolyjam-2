@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1214699989088704995}
   - component: {fileID: -3007595862939649703}
   - component: {fileID: 2690607404949351370}
+  - component: {fileID: 9078384798430862822}
   m_Layer: 0
   m_Name: "2 \u041E\u0433\u043E\u043D\u044C"
   m_TagString: Resource
@@ -103,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_OverrideArea: 1
-  m_Area: 0
+  m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
 --- !u!212 &6360651490218678388
@@ -259,3 +260,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &9078384798430862822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2869456712638943247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0550b92981e9144d8fc154e5ef3070e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -10,6 +10,7 @@ public class SurvivorUI : MonoBehaviour
     [SerializeField] private RectTransform WaterScale; 
     [SerializeField] private RectTransform FoodScale; 
     [SerializeField] private RectTransform SanityScale; 
+    [SerializeField] private RectTransform TemperatureScale; 
     
     // Start is called before the first frame update
     void Start()
@@ -24,5 +25,6 @@ public class SurvivorUI : MonoBehaviour
         WaterScale.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _survivor.Water * 3);
         FoodScale.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _survivor.Food * 3);
         SanityScale.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _survivor.Sanity * 3);
+        TemperatureScale.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _survivor.Temperature * 3);
     }
 }

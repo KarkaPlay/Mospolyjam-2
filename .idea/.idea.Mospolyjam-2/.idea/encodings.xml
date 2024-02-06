@@ -5,5 +5,7 @@
     <file url="file://$PROJECT_DIR$/Assets/Scripts/Events/FriendsEvent.cs" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/Events/HatEvent.cs" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/Events/ToolEvent.cs" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/GameControll/CreateResource.cs" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/TimeOfDay.cs" charset="windows-1251" />
   </component>
 </project>

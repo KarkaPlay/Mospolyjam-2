@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceName: "\u0413\u043B\u0438\u043D\u0430"
   descriptions:
-  - 
+  - "\u0413\u0435\u043D\u0440\u0438 \u0438\u0441\u043A\u0430\u043B \u043C\u0435\u0434\u044C,
+    \u043D\u043E \u043D\u0430\u0448\u0435\u043B \u0442\u043E\u043B\u044C\u043A\u043E
+    \u0433\u043B\u0438\u043D\u0443"
   resourceID: 7
   resourceType: 5
   survivorNeed: 0
+  recipes: []

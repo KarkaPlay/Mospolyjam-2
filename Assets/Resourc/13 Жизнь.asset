@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceName: "\u0416\u0438\u0437\u043D\u044C"
   descriptions:
-  - 
+  - "\u042D\u0442\u043E \u043D\u0435 \u0437\u043D\u0430\u0447\u0438\u0442 \u0434\u044B\u0448\u0430\u0442\u044C,
+    \u044D\u0442\u043E \u0437\u043D\u0430\u0447\u0438\u0442 \u0434\u0435\u0439\u0441\u0442\u0432\u043E\u0432\u0430\u0442\u044C"
   resourceID: 0
   resourceType: 12
   survivorNeed: 0

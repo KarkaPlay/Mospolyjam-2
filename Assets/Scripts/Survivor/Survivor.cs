@@ -257,7 +257,7 @@ public class Survivor : MonoBehaviour
             modifiers[nameof(HP)] -= 0.5f;
         
         // УДАЛИТЬ!!!
-        float difficulty = 5;
+        float difficulty = 1;
         
         HP += modifiers[nameof(HP)] * Time.deltaTime * difficulty;
         Water += modifiers[nameof(Water)] * Time.deltaTime * difficulty;
@@ -283,7 +283,7 @@ public class Survivor : MonoBehaviour
             });
         }
         
-        else if (Water < 30)
+        if (Water < 30)
         {
             FindResource(AllResouceTypes.ResourceType.Вода, true);
             TryShowTip(new List<string>()
@@ -294,7 +294,7 @@ public class Survivor : MonoBehaviour
             });
         }
 
-        else if (Food < 40)
+        if (Food < 40)
         {
             FindResource(AllResouceTypes.ResourceType.Плод, true);
             TryShowTip(new List<string>()
@@ -305,7 +305,7 @@ public class Survivor : MonoBehaviour
             });
         }
 
-        else if (Sanity < 30)
+        if (Sanity < 30)
         {
             // Вырезает друзей, если они разблокированы
             TryShowTip(new List<string>()
@@ -316,7 +316,7 @@ public class Survivor : MonoBehaviour
             });
         }
 
-        else if (Temperature < 30)
+        if (Temperature < 30)
         {
             FindResource(AllResouceTypes.ResourceType.Костер, true);
             TryShowTip(new List<string>()
@@ -415,6 +415,9 @@ public class Survivor : MonoBehaviour
                     break;
                 case AllResouceTypes.ResourceType.Плод:
                     CollectResource(resourceToCollect, ref _food);
+                    break;
+                case AllResouceTypes.ResourceType.Костер:
+                    CollectResource(resourceToCollect, ref _temperature);
                     break;
                 default:
                     Debug.LogAssertion($"Сбор ресурса {resourceToCollect.resourceData.resourceType} не прописан в Survivor.CollectingResource()");

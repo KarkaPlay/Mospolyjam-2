@@ -16,7 +16,8 @@ public class TimeOfDay : MonoBehaviour
         Night
     }
     public static DayTime currentDayTime;
-    public float timeSpeed = 1f;
+    [Tooltip("Чем больше, тем быстрее идет время (сколько часов проходит за секунду)")]
+    public float timeSpeed = 0.1f; 
 
     public static TimeOfDay Instance;
 
